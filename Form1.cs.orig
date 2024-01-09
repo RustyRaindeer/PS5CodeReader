@@ -369,10 +369,6 @@ namespace PS5CodeReader
                     LogBox.AppendLine("[*] Operation: Read UART Codes.", ReadOnlyRichTextBox.ColorError);
                     await ReadCodesAsync();
                     break;
-                case OperationType.ReadAllErrorCodes:
-                    LogBox.AppendLine("[*] Operation: Read UART Codes (full log).", ReadOnlyRichTextBox.ColorError);
-                    await ReadCodesAsync(64);
-                    break;
                 case OperationType.ClearErrorCodes:
                     LogBox.AppendLine("[*] Operation: Clear UART Codes.", ReadOnlyRichTextBox.ColorError);
                     await ClearLogsAsync();
@@ -411,50 +407,38 @@ namespace PS5CodeReader
             cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(10));
             using var serial = new SerialPort(device.Port);
             serial.Open();
-            
-            for (var i = 0; i < count; i++)
+            List<string> Lines = new();
+            for (var i = 0; i <= count; i++)
             {
-                LogBox.Append($"slot#{i}: ");
-                var command = $"errlog {i:X}";
+                var command = $"errlog {i}";
                 var checksum = SerialPort.CalculateChecksum(command);
-            
                 await serial.WriteLineAsync(command);
                 do
                 {
                     var line = await serial.ReadLineAsync(cancellationTokenSource.Token);
-                    
                     if (!string.Equals($"{command}:{checksum:X2}", line, StringComparison.InvariantCultureIgnoreCase))
                     {
                         //ignore the echo'd command capture everything else. 
-                        ShowLineDetail(line);       
+                        Lines.Add(line);
                     }
                 } while (serial.BytesToRead != 0);
-            }          
-        }
+            }
 
-        private void ShowLineDetail(string l)
-        {
-            LogBox.AppendLine(l);
-            var split = l.Split(' ');
-            if (!split.Any()) return;
-            switch (split[0])
+            foreach (var l in Lines)
             {
-                case "NG":
-                    LogBox.AppendLine("Failed to read data");
-                    break;
-                case "OK":
-                    var errorCode = split[2];
-                    try 
-                    { 
+                var split = l.Split(' ');
+                if (!split.Any()) continue;
+                switch (split[0])
+                {
+                    case "NG":
+                        LogBox.AppendLine("Failed to read data");
+                        break;
+                    case "OK":
+                        var errorCode = split[2];
                         var errorLookup = errorCodeList.PlayStation5.ErrorCodes.First(x => x.ID == errorCode);
-                        LogBox.AppendLine($"    ({errorLookup.Message})", ReadOnlyRichTextBox.ColorSuccess);
-                    } 
-                    catch
-                    {
-                        LogBox.AppendLine("     (unknown error)", ReadOnlyRichTextBox.ColorInformation);
-                    }
-                    
-                    break;
+                        LogBox.AppendLine($"{errorLookup.ID}: {errorLookup.Message}");
+                        break;
+                }
             }
         }
 

@@ -53,6 +53,7 @@ namespace PS5CodeReader
             var data = serialPort.Encoding.GetBytes($"{str}{serialPort.NewLine}");
             await serialPort.BaseStream.WriteAsync(data, cancellationToken).ConfigureAwait(false);
             await serialPort.BaseStream.FlushAsync(cancellationToken).ConfigureAwait(false);
+            Thread.Sleep(10);
         }
 
         internal static async Task WriteLineAsync(this SerialPort serialPort, string str)
@@ -60,6 +61,7 @@ namespace PS5CodeReader
             var data = serialPort.Encoding.GetBytes($"{str}{serialPort.NewLine}");
             await serialPort.BaseStream.WriteAsync(data).ConfigureAwait(false);
             await serialPort.BaseStream.FlushAsync().ConfigureAwait(false);
+            Thread.Sleep(10);
         }
 
         internal static async Task<string> RequestResponseAsync(this SerialPort serialPort, string str)

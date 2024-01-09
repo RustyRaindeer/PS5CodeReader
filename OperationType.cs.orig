@@ -6,8 +6,6 @@ namespace PS5CodeReader
     {
         [Description("Read Error Codes")]
         ReadErrorCodes,
-        [Description("Read Error Codes (full log)")]
-        ReadAllErrorCodes, 
         [Description("Clear Error Codes")]
         ClearErrorCodes,
         [Description("Monitor Mode")]
