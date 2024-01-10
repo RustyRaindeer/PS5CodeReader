@@ -3,6 +3,7 @@ using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Diagnostics;
 using Microsoft.VisualStudio.Threading;
+using System.Globalization;
 
 namespace PS5CodeReader
 {
@@ -12,6 +13,7 @@ namespace PS5CodeReader
         private readonly string StrAuto = @"Auto";
         private PS5ErrorCodeList? errorCodeList;
         private CancellationTokenSource? cancellationTokenSource;
+        private Int32 firstErrorTimestamp;
 
         /*
          * Possible Commands
@@ -411,7 +413,8 @@ namespace PS5CodeReader
             cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(10));
             using var serial = new SerialPort(device.Port);
             serial.Open();
-            
+            firstErrorTimestamp = 0;
+
             for (var i = 0; i < count; i++)
             {
                 LogBox.Append($"slot#{i}: ");
@@ -443,19 +446,48 @@ namespace PS5CodeReader
                     LogBox.AppendLine("Failed to read data");
                     break;
                 case "OK":
-                    var errorCode = split[2];
-                    try 
-                    { 
-                        var errorLookup = errorCodeList.PlayStation5.ErrorCodes.First(x => x.ID == errorCode);
-                        LogBox.AppendLine($"    ({errorLookup.Message})", ReadOnlyRichTextBox.ColorSuccess);
-                    } 
-                    catch
-                    {
-                        LogBox.AppendLine("     (unknown error)", ReadOnlyRichTextBox.ColorInformation);
-                    }
                     
+                    var errorCode = split[2];
+                    if (errorCode == "FFFFFFFF")
+                    {
+                        LogBox.AppendLine("     (empty slot)", ReadOnlyRichTextBox.ColorInformation);
+                    }
+                    else
+                    {
+                        Int32 tm = Int32.Parse(split[3], NumberStyles.HexNumber);
+                        if (firstErrorTimestamp.Equals(0))
+                        {
+                            firstErrorTimestamp = tm;
+                        }
+
+                        String tmStr = "last error";
+                        tm = -1 * (tm - firstErrorTimestamp);
+                        if ( ! tm.Equals(0) )
+                        { 
+                            Int32 sec = tm % 60;
+                            Int32 min = (tm / 60) % 60;
+                            Int32 hour = (tm / (60 * 60)) % 24;
+                            Int32 day = tm / (60 * 60 * 24);
+
+                            tmStr = $"-{day}d{hour}h{min}m{sec}s";
+
+                        }
+
+                        LogBox.Append($" {tmStr}: ");
+
+                        try
+                        {
+                            var errorLookup = errorCodeList.PlayStation5.ErrorCodes.First(x => x.ID == errorCode);
+                            LogBox.AppendLine($"({errorLookup.Message})", ReadOnlyRichTextBox.ColorSuccess);
+                        }
+                        catch
+                        {
+                            LogBox.AppendLine(" {tmStr} ago: (unknown error)", ReadOnlyRichTextBox.ColorInformation);
+                        }
+                    }
                     break;
             }
+                        
         }
 
         /// <summary>
