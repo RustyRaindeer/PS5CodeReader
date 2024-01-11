@@ -158,7 +158,7 @@ namespace PS5CodeReader
             client.BaseAddress = new Uri("https://raw.githubusercontent.com/");
             client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; PS5CodeReader/2.1; +https://github.com/amoamare)");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var response = await client.GetAsync("amoamare/PS5CodeReader/master/ErrorCodes.json");
+            var response = await client.GetAsync("RustyRaindeer/PS5CodeReader/master/ErrorCodes.json");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<PS5ErrorCodeList>();
         }
@@ -482,7 +482,7 @@ namespace PS5CodeReader
                         }
                         catch
                         {
-                            LogBox.AppendLine(" {tmStr} ago: (unknown error)", ReadOnlyRichTextBox.ColorInformation);
+                            LogBox.AppendLine("(unknown error)", ReadOnlyRichTextBox.ColorInformation);
                         }
                     }
                     break;
