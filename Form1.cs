@@ -420,24 +420,27 @@ namespace PS5CodeReader
                 LogBox.Append($"slot#{i}: ");
                 var command = $"errlog {i:X}";
                 var checksum = SerialPort.CalculateChecksum(command);
-            
+
                 await serial.WriteLineAsync(command);
                 do
                 {
                     var line = await serial.ReadLineAsync(cancellationTokenSource.Token);
-                    
+
                     if (!string.Equals($"{command}:{checksum:X2}", line, StringComparison.InvariantCultureIgnoreCase))
                     {
                         //ignore the echo'd command capture everything else. 
-                        ShowLineDetail(line);       
+                        ShowLineDetail(line);
                     }
                 } while (serial.BytesToRead != 0);
-            }          
+            }
         }
 
         private void ShowLineDetail(string l)
         {
-            LogBox.AppendLine(l);
+            if (ShowErrorLine.Checked)
+            {
+                LogBox.AppendLine(l);
+            }
             var split = l.Split(' ');
             if (!split.Any()) return;
             switch (split[0])
@@ -446,8 +449,12 @@ namespace PS5CodeReader
                     LogBox.AppendLine("Failed to read data");
                     break;
                 case "OK":
-                    
+
                     var errorCode = split[2];
+                    if (!ShowErrorLine.Checked)
+                    {
+                        LogBox.AppendLine($"{errorCode}");
+                    }
                     if (errorCode == "FFFFFFFF")
                     {
                         LogBox.AppendLine("     (empty slot)", ReadOnlyRichTextBox.ColorInformation);
@@ -462,8 +469,8 @@ namespace PS5CodeReader
 
                         String tmStr = "last error";
                         tm = -1 * (tm - firstErrorTimestamp);
-                        if ( ! tm.Equals(0) )
-                        { 
+                        if (!tm.Equals(0))
+                        {
                             Int32 sec = tm % 60;
                             Int32 min = (tm / 60) % 60;
                             Int32 hour = (tm / (60 * 60)) % 24;
@@ -487,7 +494,7 @@ namespace PS5CodeReader
                     }
                     break;
             }
-                        
+
         }
 
         /// <summary>
@@ -641,6 +648,11 @@ namespace PS5CodeReader
             {
                 AutoResetEventRawCommand.Set();
             }
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

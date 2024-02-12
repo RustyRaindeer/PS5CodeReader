@@ -28,108 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ButtonRunOperation = new Button();
-            ComboBoxDevices = new ComboBox();
-            label1 = new Label();
             LogBox = new ReadOnlyRichTextBox();
-            ComboBoxDeviceType = new ComboBox();
-            label2 = new Label();
-            label3 = new Label();
-            ComboBoxOperationType = new ComboBox();
             panel4 = new Panel();
             PanelRawCommand = new Panel();
             label4 = new Label();
             TextBoxRawCommand = new TextBox();
+            label3 = new Label();
+            label1 = new Label();
+            ComboBoxDevices = new ComboBox();
+            ComboBoxOperationType = new ComboBox();
+            ButtonRunOperation = new Button();
+            ComboBoxDeviceType = new ComboBox();
+            label2 = new Label();
             panel3 = new Panel();
+            ShowErrorLine = new CheckBox();
             panel4.SuspendLayout();
             PanelRawCommand.SuspendLayout();
             panel3.SuspendLayout();
             SuspendLayout();
             // 
-            // ButtonRunOperation
-            // 
-            ButtonRunOperation.Location = new Point(679, 22);
-            ButtonRunOperation.Name = "ButtonRunOperation";
-            ButtonRunOperation.Size = new Size(94, 29);
-            ButtonRunOperation.TabIndex = 0;
-            ButtonRunOperation.Text = "Run Operation";
-            ButtonRunOperation.UseVisualStyleBackColor = true;
-            ButtonRunOperation.Click += ButtonRunOperations_Click;
-            // 
-            // ComboBoxDevices
-            // 
-            ComboBoxDevices.DropDownStyle = ComboBoxStyle.DropDownList;
-            ComboBoxDevices.FormattingEnabled = true;
-            ComboBoxDevices.Location = new Point(3, 131);
-            ComboBoxDevices.Name = "ComboBoxDevices";
-            ComboBoxDevices.Size = new Size(670, 28);
-            ComboBoxDevices.TabIndex = 3;
-            ComboBoxDevices.DropDown += ComboBoxDevices_DropDown;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 108);
-            label1.Name = "label1";
-            label1.Size = new Size(151, 20);
-            label1.TabIndex = 4;
-            label1.Text = "Serial Devices (UART)";
-            // 
             // LogBox
             // 
             LogBox.Dock = DockStyle.Fill;
             LogBox.Location = new Point(0, 0);
+            LogBox.Margin = new Padding(3, 2, 3, 2);
             LogBox.Name = "LogBox";
             LogBox.ReadOnly = true;
-            LogBox.Size = new Size(782, 438);
+            LogBox.Size = new Size(728, 328);
             LogBox.TabIndex = 5;
             LogBox.TabStop = false;
             LogBox.Text = "";
-            // 
-            // ComboBoxDeviceType
-            // 
-            ComboBoxDeviceType.DropDownStyle = ComboBoxStyle.DropDownList;
-            ComboBoxDeviceType.FormattingEnabled = true;
-            ComboBoxDeviceType.Location = new Point(3, 23);
-            ComboBoxDeviceType.Name = "ComboBoxDeviceType";
-            ComboBoxDeviceType.Size = new Size(670, 28);
-            ComboBoxDeviceType.TabIndex = 7;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(3, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(98, 20);
-            label2.TabIndex = 8;
-            label2.Text = "Select Device";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(3, 54);
-            label3.Name = "label3";
-            label3.Size = new Size(155, 20);
-            label3.TabIndex = 10;
-            label3.Text = "Select Operation Type";
-            // 
-            // ComboBoxOperationType
-            // 
-            ComboBoxOperationType.DropDownStyle = ComboBoxStyle.DropDownList;
-            ComboBoxOperationType.FormattingEnabled = true;
-            ComboBoxOperationType.Location = new Point(3, 77);
-            ComboBoxOperationType.Name = "ComboBoxOperationType";
-            ComboBoxOperationType.Size = new Size(670, 28);
-            ComboBoxOperationType.TabIndex = 9;
             // 
             // panel4
             // 
             panel4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel4.Controls.Add(LogBox);
             panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(0, 216);
+            panel4.Location = new Point(0, 162);
+            panel4.Margin = new Padding(3, 2, 3, 2);
             panel4.Name = "panel4";
-            panel4.Size = new Size(782, 438);
+            panel4.Size = new Size(728, 328);
             panel4.TabIndex = 14;
             // 
             // PanelRawCommand
@@ -138,29 +76,100 @@
             PanelRawCommand.Controls.Add(label4);
             PanelRawCommand.Controls.Add(TextBoxRawCommand);
             PanelRawCommand.Dock = DockStyle.Top;
-            PanelRawCommand.Location = new Point(0, 160);
+            PanelRawCommand.Location = new Point(0, 120);
+            PanelRawCommand.Margin = new Padding(3, 2, 3, 2);
             PanelRawCommand.Name = "PanelRawCommand";
-            PanelRawCommand.Size = new Size(782, 56);
+            PanelRawCommand.Size = new Size(728, 42);
             PanelRawCommand.TabIndex = 13;
             PanelRawCommand.Visible = false;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(3, 3);
+            label4.Location = new Point(3, 2);
             label4.Name = "label4";
-            label4.Size = new Size(110, 20);
+            label4.Size = new Size(89, 15);
             label4.TabIndex = 11;
             label4.Text = "Raw Command";
             // 
             // TextBoxRawCommand
             // 
             TextBoxRawCommand.Enabled = false;
-            TextBoxRawCommand.Location = new Point(3, 26);
+            TextBoxRawCommand.Location = new Point(3, 20);
+            TextBoxRawCommand.Margin = new Padding(3, 2, 3, 2);
             TextBoxRawCommand.Name = "TextBoxRawCommand";
-            TextBoxRawCommand.Size = new Size(670, 27);
+            TextBoxRawCommand.Size = new Size(587, 23);
             TextBoxRawCommand.TabIndex = 12;
             TextBoxRawCommand.KeyPress += TextBoxRawCommand_KeyPress;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(3, 40);
+            label3.Name = "label3";
+            label3.Size = new Size(121, 15);
+            label3.TabIndex = 10;
+            label3.Text = "Select Operation Type";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(3, 81);
+            label1.Name = "label1";
+            label1.Size = new Size(117, 15);
+            label1.TabIndex = 4;
+            label1.Text = "Serial Devices (UART)";
+            // 
+            // ComboBoxDevices
+            // 
+            ComboBoxDevices.DropDownStyle = ComboBoxStyle.DropDownList;
+            ComboBoxDevices.FormattingEnabled = true;
+            ComboBoxDevices.Location = new Point(3, 98);
+            ComboBoxDevices.Margin = new Padding(3, 2, 3, 2);
+            ComboBoxDevices.Name = "ComboBoxDevices";
+            ComboBoxDevices.Size = new Size(587, 23);
+            ComboBoxDevices.TabIndex = 3;
+            ComboBoxDevices.DropDown += ComboBoxDevices_DropDown;
+            // 
+            // ComboBoxOperationType
+            // 
+            ComboBoxOperationType.DropDownStyle = ComboBoxStyle.DropDownList;
+            ComboBoxOperationType.FormattingEnabled = true;
+            ComboBoxOperationType.Location = new Point(3, 58);
+            ComboBoxOperationType.Margin = new Padding(3, 2, 3, 2);
+            ComboBoxOperationType.Name = "ComboBoxOperationType";
+            ComboBoxOperationType.Size = new Size(587, 23);
+            ComboBoxOperationType.TabIndex = 9;
+            // 
+            // ButtonRunOperation
+            // 
+            ButtonRunOperation.Location = new Point(594, 16);
+            ButtonRunOperation.Margin = new Padding(3, 2, 3, 2);
+            ButtonRunOperation.Name = "ButtonRunOperation";
+            ButtonRunOperation.Size = new Size(131, 22);
+            ButtonRunOperation.TabIndex = 0;
+            ButtonRunOperation.Text = "Run Operation";
+            ButtonRunOperation.UseVisualStyleBackColor = true;
+            ButtonRunOperation.Click += ButtonRunOperations_Click;
+            // 
+            // ComboBoxDeviceType
+            // 
+            ComboBoxDeviceType.DropDownStyle = ComboBoxStyle.DropDownList;
+            ComboBoxDeviceType.FormattingEnabled = true;
+            ComboBoxDeviceType.Location = new Point(3, 17);
+            ComboBoxDeviceType.Margin = new Padding(3, 2, 3, 2);
+            ComboBoxDeviceType.Name = "ComboBoxDeviceType";
+            ComboBoxDeviceType.Size = new Size(587, 23);
+            ComboBoxDeviceType.TabIndex = 7;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(3, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(76, 15);
+            label2.TabIndex = 8;
+            label2.Text = "Select Device";
             // 
             // panel3
             // 
@@ -170,23 +179,36 @@
             panel3.Controls.Add(ButtonRunOperation);
             panel3.Controls.Add(ComboBoxOperationType);
             panel3.Controls.Add(ComboBoxDevices);
+            panel3.Controls.Add(ShowErrorLine);
             panel3.Controls.Add(label1);
             panel3.Controls.Add(label3);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
-            panel3.Margin = new Padding(3, 3, 3, 5);
+            panel3.Margin = new Padding(3, 2, 3, 4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(782, 160);
+            panel3.Size = new Size(728, 120);
             panel3.TabIndex = 11;
+            // 
+            // ShowErrorLine
+            // 
+            ShowErrorLine.AutoSize = true;
+            ShowErrorLine.Location = new Point(594, 59);
+            ShowErrorLine.Margin = new Padding(3, 2, 3, 2);
+            ShowErrorLine.Name = "ShowErrorLine";
+            ShowErrorLine.Size = new Size(133, 19);
+            ShowErrorLine.TabIndex = 11;
+            ShowErrorLine.Text = "Show Line Response";
+            ShowErrorLine.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(782, 654);
+            ClientSize = new Size(728, 490);
             Controls.Add(panel4);
             Controls.Add(PanelRawCommand);
             Controls.Add(panel3);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "PS5 Code Reader";
@@ -200,19 +222,19 @@
         }
 
         #endregion
-
-        private Button ButtonRunOperation;
-        private ComboBox ComboBoxDevices;
-        private Label label1;
         private ReadOnlyRichTextBox LogBox;
-        private ComboBox ComboBoxDeviceType;
-        private Label label2;
-        private Label label3;
-        private ComboBox ComboBoxOperationType;
         private Panel PanelRawCommand;
-        private Panel panel3;
         private Panel panel4;
         private TextBox TextBoxRawCommand;
         private Label label4;
+        private Label label3;
+        private Label label1;
+        private ComboBox ComboBoxDevices;
+        private ComboBox ComboBoxOperationType;
+        private Button ButtonRunOperation;
+        private ComboBox ComboBoxDeviceType;
+        private Label label2;
+        private Panel panel3;
+        private CheckBox ShowErrorLine;
     }
 }
