@@ -59,7 +59,6 @@ namespace PS5CodeReader
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            LoadDatabaseTypes();
             LoadOperationTypes();
             LoadPorts();
             ComboBoxOperationType.SelectedValueChanged += ComboBoxOperationType_SelectedValueChanged;
@@ -91,13 +90,6 @@ namespace PS5CodeReader
         private void LoadPorts()
         {
             ComboBoxDevices.DataSource = SerialPort.SelectSerial();
-        }
-
-        private void LoadDatabaseTypes()
-        {
-            ComboBoxDeviceType.EnumForComboBox<DataBaseType>();
-            ComboBoxDeviceType.DisplayMember = "Description";
-            ComboBoxDeviceType.ValueMember = "Value";
         }
 
         private void LoadOperationTypes()
@@ -278,7 +270,6 @@ namespace PS5CodeReader
                 ButtonRunOperation.Text = value ? @"Run Operation" : @"Cancel";
                 ButtonRunOperation.Tag = !value;
                 ComboBoxDevices.Enabled = value;
-                ComboBoxDeviceType.Enabled = value;
                 ComboBoxOperationType.Enabled = value;
                 TextBoxRawCommand.Enabled = !value;
             }

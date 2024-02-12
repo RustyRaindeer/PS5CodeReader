@@ -38,8 +38,6 @@
             ComboBoxDevices = new ComboBox();
             ComboBoxOperationType = new ComboBox();
             ButtonRunOperation = new Button();
-            ComboBoxDeviceType = new ComboBox();
-            label2 = new Label();
             panel3 = new Panel();
             ShowErrorLine = new CheckBox();
             panel4.SuspendLayout();
@@ -54,7 +52,7 @@
             LogBox.Margin = new Padding(3, 2, 3, 2);
             LogBox.Name = "LogBox";
             LogBox.ReadOnly = true;
-            LogBox.Size = new Size(728, 328);
+            LogBox.Size = new Size(728, 356);
             LogBox.TabIndex = 5;
             LogBox.TabStop = false;
             LogBox.Text = "";
@@ -64,10 +62,10 @@
             panel4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel4.Controls.Add(LogBox);
             panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(0, 162);
+            panel4.Location = new Point(0, 134);
             panel4.Margin = new Padding(3, 2, 3, 2);
             panel4.Name = "panel4";
-            panel4.Size = new Size(728, 328);
+            panel4.Size = new Size(728, 356);
             panel4.TabIndex = 14;
             // 
             // PanelRawCommand
@@ -76,10 +74,10 @@
             PanelRawCommand.Controls.Add(label4);
             PanelRawCommand.Controls.Add(TextBoxRawCommand);
             PanelRawCommand.Dock = DockStyle.Top;
-            PanelRawCommand.Location = new Point(0, 120);
+            PanelRawCommand.Location = new Point(0, 87);
             PanelRawCommand.Margin = new Padding(3, 2, 3, 2);
             PanelRawCommand.Name = "PanelRawCommand";
-            PanelRawCommand.Size = new Size(728, 42);
+            PanelRawCommand.Size = new Size(728, 47);
             PanelRawCommand.TabIndex = 13;
             PanelRawCommand.Visible = false;
             // 
@@ -105,7 +103,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(3, 40);
+            label3.Location = new Point(3, 4);
             label3.Name = "label3";
             label3.Size = new Size(121, 15);
             label3.TabIndex = 10;
@@ -114,7 +112,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(3, 81);
+            label1.Location = new Point(3, 45);
             label1.Name = "label1";
             label1.Size = new Size(117, 15);
             label1.TabIndex = 4;
@@ -124,7 +122,7 @@
             // 
             ComboBoxDevices.DropDownStyle = ComboBoxStyle.DropDownList;
             ComboBoxDevices.FormattingEnabled = true;
-            ComboBoxDevices.Location = new Point(3, 98);
+            ComboBoxDevices.Location = new Point(3, 62);
             ComboBoxDevices.Margin = new Padding(3, 2, 3, 2);
             ComboBoxDevices.Name = "ComboBoxDevices";
             ComboBoxDevices.Size = new Size(587, 23);
@@ -135,7 +133,7 @@
             // 
             ComboBoxOperationType.DropDownStyle = ComboBoxStyle.DropDownList;
             ComboBoxOperationType.FormattingEnabled = true;
-            ComboBoxOperationType.Location = new Point(3, 58);
+            ComboBoxOperationType.Location = new Point(3, 22);
             ComboBoxOperationType.Margin = new Padding(3, 2, 3, 2);
             ComboBoxOperationType.Name = "ComboBoxOperationType";
             ComboBoxOperationType.Size = new Size(587, 23);
@@ -143,7 +141,7 @@
             // 
             // ButtonRunOperation
             // 
-            ButtonRunOperation.Location = new Point(594, 16);
+            ButtonRunOperation.Location = new Point(594, 23);
             ButtonRunOperation.Margin = new Padding(3, 2, 3, 2);
             ButtonRunOperation.Name = "ButtonRunOperation";
             ButtonRunOperation.Size = new Size(131, 22);
@@ -152,30 +150,9 @@
             ButtonRunOperation.UseVisualStyleBackColor = true;
             ButtonRunOperation.Click += ButtonRunOperations_Click;
             // 
-            // ComboBoxDeviceType
-            // 
-            ComboBoxDeviceType.DropDownStyle = ComboBoxStyle.DropDownList;
-            ComboBoxDeviceType.FormattingEnabled = true;
-            ComboBoxDeviceType.Location = new Point(3, 17);
-            ComboBoxDeviceType.Margin = new Padding(3, 2, 3, 2);
-            ComboBoxDeviceType.Name = "ComboBoxDeviceType";
-            ComboBoxDeviceType.Size = new Size(587, 23);
-            ComboBoxDeviceType.TabIndex = 7;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(3, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(76, 15);
-            label2.TabIndex = 8;
-            label2.Text = "Select Device";
-            // 
             // panel3
             // 
             panel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel3.Controls.Add(label2);
-            panel3.Controls.Add(ComboBoxDeviceType);
             panel3.Controls.Add(ButtonRunOperation);
             panel3.Controls.Add(ComboBoxOperationType);
             panel3.Controls.Add(ComboBoxDevices);
@@ -186,13 +163,13 @@
             panel3.Location = new Point(0, 0);
             panel3.Margin = new Padding(3, 2, 3, 4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(728, 120);
+            panel3.Size = new Size(728, 87);
             panel3.TabIndex = 11;
             // 
             // ShowErrorLine
             // 
             ShowErrorLine.AutoSize = true;
-            ShowErrorLine.Location = new Point(594, 59);
+            ShowErrorLine.Location = new Point(594, 64);
             ShowErrorLine.Margin = new Padding(3, 2, 3, 2);
             ShowErrorLine.Name = "ShowErrorLine";
             ShowErrorLine.Size = new Size(133, 19);
@@ -232,8 +209,6 @@
         private ComboBox ComboBoxDevices;
         private ComboBox ComboBoxOperationType;
         private Button ButtonRunOperation;
-        private ComboBox ComboBoxDeviceType;
-        private Label label2;
         private Panel panel3;
         private CheckBox ShowErrorLine;
     }
