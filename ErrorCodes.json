@@ -59,7 +59,7 @@
       },
       {
         "ID": "80060000",
-        "Message": "APU VRM (6 Phases) Power Fail - check PWM controller",
+        "Message": "APU VRM (6 Phases) Power Fail - Check PWM controller",
         "Status": 0,
         "Priority": 0
       },

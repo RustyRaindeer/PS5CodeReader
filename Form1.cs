@@ -13,7 +13,7 @@ namespace PS5CodeReader
         private readonly string StrAuto = @"Auto";
         private PS5ErrorCodeList? errorCodeList;
         private CancellationTokenSource? cancellationTokenSource;
-        private Int32 firstErrorTimestamp;
+        private UInt32 firstErrorTimestamp;
 
         /*
          * Possible Commands
@@ -404,7 +404,7 @@ namespace PS5CodeReader
             cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(10));
             using var serial = new SerialPort(device.Port);
             serial.Open();
-            firstErrorTimestamp = 0;
+            firstErrorTimestamp = 0xffffffff;
 
             for (var i = 0; i < count; i++)
             {
@@ -452,23 +452,38 @@ namespace PS5CodeReader
                     }
                     else
                     {
-                        Int32 tm = Int32.Parse(split[3], NumberStyles.HexNumber);
-                        if (firstErrorTimestamp.Equals(0))
+                        String tmStr = "(time unknown)";
+                        UInt32 tm = UInt32.Parse(split[3], NumberStyles.HexNumber);
+                        if ( tm.Equals(0xffffffff) )
                         {
+                            // This line has no time stamp ?!. Reset reference.
                             firstErrorTimestamp = tm;
                         }
-
-                        String tmStr = "last error";
-                        tm = -1 * (tm - firstErrorTimestamp);
-                        if (!tm.Equals(0))
+                        else
                         {
-                            Int32 sec = tm % 60;
-                            Int32 min = (tm / 60) % 60;
-                            Int32 hour = (tm / (60 * 60)) % 24;
-                            Int32 day = tm / (60 * 60 * 24);
+                            if (firstErrorTimestamp.Equals(0xffffffff) || tm > firstErrorTimestamp)
+                            {
+                                if (firstErrorTimestamp.Equals(0xffffffff))
+                                {
+                                    tmStr = "(latest/newest error)";
+                                }
+                                else
+                                {
+                                    tmStr = "(time stamp reset)";
+                                }
+                                
+                                firstErrorTimestamp = tm;
+                            }
+                            else
+                            {
+                                tm = firstErrorTimestamp - tm;
+                                UInt32 sec = tm % 60;
+                                UInt32 min = (tm / 60) % 60;
+                                UInt32 hour = (tm / (60 * 60)) % 24;
+                                UInt32 day = tm / (60 * 60 * 24);
 
-                            tmStr = $"-{day}d{hour}h{min}m{sec}s";
-
+                                tmStr = $"- {day}d{hour}h{min}m{sec}s";
+                            }
                         }
 
                         LogBox.Append($" {tmStr}: ");
@@ -476,11 +491,11 @@ namespace PS5CodeReader
                         try
                         {
                             var errorLookup = errorCodeList.PlayStation5.ErrorCodes.First(x => x.ID == errorCode);
-                            LogBox.AppendLine($"({errorLookup.Message})", ReadOnlyRichTextBox.ColorSuccess);
+                            LogBox.AppendLine($"{errorLookup.Message}", ReadOnlyRichTextBox.ColorSuccess);
                         }
                         catch
                         {
-                            LogBox.AppendLine("(unknown error)", ReadOnlyRichTextBox.ColorInformation);
+                            LogBox.AppendLine("Unknown Error", ReadOnlyRichTextBox.ColorInformation);
                         }
                     }
                     break;
