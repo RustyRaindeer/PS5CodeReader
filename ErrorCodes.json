@@ -41,7 +41,7 @@
       },
       {
         "ID": "80050000",
-        "Message": "APU VRM (2 Phases) Power Fail",
+        "Message": "APU VRM (2 Phases) Power Fail - Check PWM controller",
         "Status": 0,
         "Priority": 0
       },
@@ -59,7 +59,7 @@
       },
       {
         "ID": "80060000",
-        "Message": "APU VRM (6 Phases) Power Fail",
+        "Message": "APU VRM (6 Phases) Power Fail - check PWM controller",
         "Status": 0,
         "Priority": 0
       },
@@ -1727,7 +1727,7 @@
       },
       {
         "ID": "80810001",
-        "Message": "General Power Failure (Periphery, GDDR6, APU, Data Line Short)",
+        "Message": "General Power Failure (Peripheral, GDDR6, APU, Data Line Short)",
         "Status": 0,
         "Priority": 0
       },
@@ -1752,6 +1752,12 @@
       {
         "ID": "808300F0",
         "Message": "Secure Loader Error",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808300F1",
+        "Message": "Known Unknown - Possible related to Secure Loader Error (Southbridge, APU, SSD)",
         "Status": 0,
         "Priority": 0
       },
@@ -1804,6 +1810,12 @@
         "Priority": 0
       },
       {
+        "ID": "808940AE",
+        "Message": "NOR Modification Error.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
         "ID": "808B0000",
         "Message": "Known Unknown 474 (Power or Short) - Report Findings",
         "Status": 0,
@@ -1824,6 +1836,12 @@
       {
         "ID": "808B00FF",
         "Message": "Known Unknown 823 (Power) - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808C2092",
+        "Message": "Possibly APU I2C lines damaged or disconnected. Check APU for die cracks.",
         "Status": 0,
         "Priority": 0
       },
@@ -1937,7 +1955,7 @@
       },
       {
         "ID": "80C00140",
-        "Message": "APU Freeze (No Response) - GDDR6 Data Line Issue (Replace)",
+        "Message": "APU Freeze (No Response) - Forced Power Off via Power Button",
         "Status": 0,
         "Priority": 0
       },
@@ -1949,13 +1967,13 @@
       },
       {
         "ID": "86000005",
-        "Message": "NOR Corrupt - Regenerate With BwE PS5 NOR Tool",
+        "Message": "NOR Corrupt - Fix or replace",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "86000006",
-        "Message": "NOR Corrupt - Regenerate With BwE PS5 NOR Tool",
+        "Message": "NOR Corrupt - Fix or replace",
         "Status": 0,
         "Priority": 0
       },
@@ -2009,7 +2027,7 @@
       },
       {
         "ID": "C00C0002",
-        "Message": "VRM Controller Failure",
+        "Message": "VRM Controller Failure - Check PWM controller and related components",
         "Status": 0,
         "Priority": 0
       },
