@@ -1949,7 +1949,7 @@
       },
       {
         "ID": "80C00136",
-        "Message": "WI-FI or BT Problem or Power Failure",
+        "Message": "WIFI/BT Module Not Responding. Check module and power.",
         "Status": 0,
         "Priority": 0
       },
