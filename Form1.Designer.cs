@@ -39,7 +39,9 @@
             ComboBoxOperationType = new ComboBox();
             ButtonRunOperation = new Button();
             panel3 = new Panel();
+            ComboBoxDatabase = new ComboBox();
             ShowErrorLine = new CheckBox();
+            label2 = new Label();
             panel4.SuspendLayout();
             PanelRawCommand.SuspendLayout();
             panel3.SuspendLayout();
@@ -52,7 +54,7 @@
             LogBox.Margin = new Padding(3, 2, 3, 2);
             LogBox.Name = "LogBox";
             LogBox.ReadOnly = true;
-            LogBox.Size = new Size(728, 356);
+            LogBox.Size = new Size(728, 376);
             LogBox.TabIndex = 5;
             LogBox.TabStop = false;
             LogBox.Text = "";
@@ -62,10 +64,10 @@
             panel4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel4.Controls.Add(LogBox);
             panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(0, 134);
+            panel4.Location = new Point(0, 176);
             panel4.Margin = new Padding(3, 2, 3, 2);
             panel4.Name = "panel4";
-            panel4.Size = new Size(728, 356);
+            panel4.Size = new Size(728, 376);
             panel4.TabIndex = 14;
             // 
             // PanelRawCommand
@@ -74,7 +76,7 @@
             PanelRawCommand.Controls.Add(label4);
             PanelRawCommand.Controls.Add(TextBoxRawCommand);
             PanelRawCommand.Dock = DockStyle.Top;
-            PanelRawCommand.Location = new Point(0, 87);
+            PanelRawCommand.Location = new Point(0, 129);
             PanelRawCommand.Margin = new Padding(3, 2, 3, 2);
             PanelRawCommand.Name = "PanelRawCommand";
             PanelRawCommand.Size = new Size(728, 47);
@@ -138,6 +140,7 @@
             ComboBoxOperationType.Name = "ComboBoxOperationType";
             ComboBoxOperationType.Size = new Size(587, 23);
             ComboBoxOperationType.TabIndex = 9;
+            ComboBoxOperationType.SelectedIndexChanged += ComboBoxOperationType_SelectedIndexChanged;
             // 
             // ButtonRunOperation
             // 
@@ -154,17 +157,30 @@
             // 
             panel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel3.Controls.Add(ButtonRunOperation);
+            panel3.Controls.Add(ComboBoxDatabase);
             panel3.Controls.Add(ComboBoxOperationType);
             panel3.Controls.Add(ComboBoxDevices);
             panel3.Controls.Add(ShowErrorLine);
+            panel3.Controls.Add(label2);
             panel3.Controls.Add(label1);
             panel3.Controls.Add(label3);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Margin = new Padding(3, 2, 3, 4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(728, 87);
+            panel3.Size = new Size(728, 129);
             panel3.TabIndex = 11;
+            // 
+            // ComboBoxDatabase
+            // 
+            ComboBoxDatabase.DropDownStyle = ComboBoxStyle.DropDownList;
+            ComboBoxDatabase.FormattingEnabled = true;
+            ComboBoxDatabase.Items.AddRange(new object[] { "RustyRaindeer/PS5CodeReader/master/ErrorCodes.json", "amoamare/Console-Service-Tool/master/Resources/ErrorCodes.json" });
+            ComboBoxDatabase.Location = new Point(3, 104);
+            ComboBoxDatabase.Margin = new Padding(3, 2, 3, 2);
+            ComboBoxDatabase.Name = "ComboBoxDatabase";
+            ComboBoxDatabase.Size = new Size(587, 23);
+            ComboBoxDatabase.TabIndex = 9;
             // 
             // ShowErrorLine
             // 
@@ -177,11 +193,21 @@
             ShowErrorLine.Text = "Show Line Response";
             ShowErrorLine.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(3, 87);
+            label2.Name = "label2";
+            label2.Size = new Size(116, 15);
+            label2.TabIndex = 4;
+            label2.Text = "Error codes database";
+            label2.Click += label2_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(728, 490);
+            ClientSize = new Size(728, 552);
             Controls.Add(panel4);
             Controls.Add(PanelRawCommand);
             Controls.Add(panel3);
@@ -211,5 +237,7 @@
         private Button ButtonRunOperation;
         private Panel panel3;
         private CheckBox ShowErrorLine;
+        private Label label2;
+        private ComboBox ComboBoxDatabase;
     }
 }

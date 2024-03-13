@@ -4,19 +4,16 @@ using System.Text.Json;
 using System.Diagnostics;
 using Microsoft.VisualStudio.Threading;
 using System.Globalization;
-using Microsoft.Win32;
 
 namespace PS5CodeReader
 {
     public partial class Form1 : Form
     {
-        private readonly string registryKeyName = @"SOFTWARE\RustyRaindeer\PS5CodeReader";
         private readonly string FileNameCache = @"cache.json";
         private readonly string StrAuto = @"Auto";
         private PS5ErrorCodeList? errorCodeList;
         private CancellationTokenSource? cancellationTokenSource;
         private UInt32 firstErrorTimestamp;
-        private Int32 errorDatabaseIndex = -1;
 
         /*
          * Possible Commands
@@ -54,47 +51,17 @@ namespace PS5CodeReader
          * ejectsw
          */
 
-        public void saveSelectedErrorDatabaseIndexToRegistry(Int32 value)
-        {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(registryKeyName, true);
-            if (key != null)
-            {
-                key.SetValue("ErrorDatabaseIndex", value, RegistryValueKind.DWord);
-                key.Close();
-            }
-        }
-        public void initRegistry()
-        {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(registryKeyName);
-
-            //if it does exist, retrieve the stored values  
-            if (key != null)
-            {
-                errorDatabaseIndex = int.Parse(key.GetValue("ErrorDatabaseIndex").ToString());
-                key.Close();
-            }
-            else
-            {
-                key = Registry.CurrentUser.CreateSubKey(registryKeyName);
-
-                key.SetValue("ErrorDatabaseIndex", errorDatabaseIndex);
-                key.Close();
-            }
-        }
 
         public Form1()
         {
             InitializeComponent();
         }
 
-
         private async void Form1_Load(object sender, EventArgs e)
         {
-            initRegistry();
             LoadOperationTypes();
             LoadPorts();
             ComboBoxOperationType.SelectedValueChanged += ComboBoxOperationType_SelectedValueChanged;
-            ComboBoxDatabase.SelectedIndex = errorDatabaseIndex; // ComboBoxDatabase.Items.IndexOf("RustyRaindeer/PS5CodeReader/master/ErrorCodes.json");
             await GetErrorCodesListAsync();
             if (errorCodeList == default)
             {
@@ -104,17 +71,12 @@ namespace PS5CodeReader
             {
                 LogBox.AppendLine("[+] Please connect your Playstation 5 to UART do not power up the console.", ReadOnlyRichTextBox.ColorInformation);
             }
-            ComboBoxDatabase.SelectedValueChanged += ComboBoxDatabase_SelectedValueChanged;
+
         }
 
         private void ComboBoxOperationType_SelectedValueChanged(object? sender, EventArgs e)
         {
             PanelRawCommand.Visible = ComboBoxOperationType.SelectedValue is OperationType type && type == OperationType.RunRawCommand;
-        }
-
-        private void ComboBoxDatabase_SelectedValueChanged(object? sender, EventArgs e)
-        {
-            GetErrorCodesListAsync();
         }
 
         private void ComboBoxDevices_DropDown(object sender, EventArgs e)
@@ -148,21 +110,12 @@ namespace PS5CodeReader
             try
             {
                 LogBox.Append("Attempting to load from server...");
-                errorCodeList = await GetErrorCodesGitHubAsync($"{ComboBoxDatabase.SelectedItem}");
+                errorCodeList = await GetErrorCodesGitHubAsync();
                 if (errorCodeList != default)
                 {
                     LogBox.Okay();
-
-                    Boolean valueChanged = (ComboBoxDatabase.SelectedIndex != errorDatabaseIndex);
-                    errorDatabaseIndex = ComboBoxDatabase.SelectedIndex;
-                    
-                    if ( valueChanged )
-                    {
-                        saveSelectedErrorDatabaseIndexToRegistry(errorDatabaseIndex);
-                    }
-                                        
                     //Store errorCode list as a chache.
-                    await CacheErrorListLocalAsync(valueChanged);
+                    await CacheErrorListLocalAsync();
                 }
                 else
                 {
@@ -191,13 +144,13 @@ namespace PS5CodeReader
         /// Get List of Error Codes for the PS5 from Git hub server.
         /// </summary>
         /// <returns>Error Code List</returns>
-        private static async Task<PS5ErrorCodeList?> GetErrorCodesGitHubAsync(string fileRef)
+        private static async Task<PS5ErrorCodeList?> GetErrorCodesGitHubAsync()
         {
             using var client = new HttpClient();
             client.BaseAddress = new Uri("https://raw.githubusercontent.com/");
             client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; PS5CodeReader/2.1; +https://github.com/amoamare)");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var response = await client.GetAsync(fileRef);
+            var response = await client.GetAsync("RustyRaindeer/PS5CodeReader/master/ErrorCodes.json");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<PS5ErrorCodeList>();
         }
@@ -247,7 +200,7 @@ namespace PS5CodeReader
         /// Cachce error list on local disk
         /// </summary>
         /// <returns></returns>
-        private async Task CacheErrorListLocalAsync(Boolean databaseSwap)
+        private async Task CacheErrorListLocalAsync()
         {
             if (errorCodeList == default)
             {
@@ -274,7 +227,7 @@ namespace PS5CodeReader
                     return;
                 }
                 LogBox.Okay();
-                if (cached.Revision < errorCodeList.Revision || databaseSwap)
+                if (cached.Revision < errorCodeList.Revision)
                 {
                     LogBox.AppendLine($"Cached Version: {cached.Revision}.");
                     LogBox.AppendLine($"Server Version: {errorCodeList.Revision}.");
@@ -318,7 +271,6 @@ namespace PS5CodeReader
                 ButtonRunOperation.Tag = !value;
                 ComboBoxDevices.Enabled = value;
                 ComboBoxOperationType.Enabled = value;
-                ComboBoxDatabase.Enabled = value;
                 TextBoxRawCommand.Enabled = !value;
             }
         }
@@ -502,7 +454,7 @@ namespace PS5CodeReader
                     {
                         String tmStr = "(time unknown)";
                         UInt32 tm = UInt32.Parse(split[3], NumberStyles.HexNumber);
-                        if (tm.Equals(0xffffffff))
+                        if ( tm.Equals(0xffffffff) )
                         {
                             // This line has no time stamp ?!. Reset reference.
                             firstErrorTimestamp = tm;
@@ -519,7 +471,7 @@ namespace PS5CodeReader
                                 {
                                     tmStr = "(time stamp reset)";
                                 }
-
+                                
                                 firstErrorTimestamp = tm;
                             }
                             else
@@ -633,8 +585,7 @@ namespace PS5CodeReader
                 LogBox.AppendLine("[-] No Playstation 5 Detected!", ReadOnlyRichTextBox.ColorError);
                 return;
             }
-            
-            using var ofd = new System.Windows.Forms.OpenFileDialog();
+            using var ofd = new OpenFileDialog();
             ofd.InitialDirectory = Directory.GetCurrentDirectory();
             ofd.RestoreDirectory = true;
             ofd.Title = @"Select Command List";
@@ -708,20 +659,6 @@ namespace PS5CodeReader
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ComboBoxOperationType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ComboBoxDatabase_SelectedIndexChanged(object sender, EventArgs e)
-        {
         }
     }
 }
