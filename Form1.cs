@@ -147,7 +147,7 @@ namespace PS5CodeReader
             errorCodeList = default;
             try
             {
-                LogBox.Append("Attempting to load from server...");
+                LogBox.Append($"Attempting to load from server {ComboBoxDatabase.SelectedItem} ...");
                 errorCodeList = await GetErrorCodesGitHubAsync($"{ComboBoxDatabase.SelectedItem}");
                 if (errorCodeList != default)
                 {
@@ -155,22 +155,32 @@ namespace PS5CodeReader
 
                     Boolean valueChanged = (ComboBoxDatabase.SelectedIndex != errorDatabaseIndex);
                     errorDatabaseIndex = ComboBoxDatabase.SelectedIndex;
-                    
-                    if ( valueChanged )
+
+                    if (valueChanged)
                     {
                         saveSelectedErrorDatabaseIndexToRegistry(errorDatabaseIndex);
                     }
-                                        
+
                     //Store errorCode list as a chache.
                     await CacheErrorListLocalAsync(valueChanged);
                 }
                 else
                 {
+                    if (ComboBoxDatabase.SelectedIndex != errorDatabaseIndex)
+                    {
+                        LogBox.AppendLine("[-] FAILED, Reverting back to previous database selection", ReadOnlyRichTextBox.ColorError);
+                        ComboBoxDatabase.SelectedIndex = errorDatabaseIndex;
+                    }
                     LogBox.Fail();
                 }
             }
             catch
             {
+                if (ComboBoxDatabase.SelectedIndex != errorDatabaseIndex)
+                {
+                    LogBox.AppendLine("[-] FAILED, Reverting back to previous database selection", ReadOnlyRichTextBox.ColorError);
+                    ComboBoxDatabase.SelectedIndex = errorDatabaseIndex;
+                }
                 LogBox.Fail();
                 //todo: Error Handling
                 //Attempt to get error codes from server failed. 

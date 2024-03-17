@@ -1,5 +1,5 @@
 ﻿{
-  "Revision": "1.0.0.5",
+  "Revision": "1.0.0.6",
   "Description": "Reformatted GDDR6 error strings. Updated 80800022",
   "PlayStation5": {
     "ErrorCodes": [
