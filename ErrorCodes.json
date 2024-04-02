@@ -1,6 +1,6 @@
 ﻿{
-  "Revision": "1.0.0.6",
-  "Description": "Reformatted GDDR6 error strings. Updated 80800022",
+  "Revision": "1.0.0.7",
+  "Description": "Modified some SSD controller related codes",
   "PlayStation5": {
     "ErrorCodes": [
       {
@@ -1763,7 +1763,7 @@
       },
       {
         "ID": "80870003",
-        "Message": "Post Secure Loader Error",
+        "Message": "SSD Controller chip not present or not responding.",
         "Status": 0,
         "Priority": 0
       },
@@ -1788,6 +1788,12 @@
       {
         "ID": "80871062",
         "Message": "SSD Controller \u003C-\u003E Syscon (Bridge) Data Line Error",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80871064",
+        "Message": "SSD Controller related error (replace) [GCRL]",
         "Status": 0,
         "Priority": 0
       },
