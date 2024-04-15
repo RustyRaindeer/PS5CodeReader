@@ -1,6 +1,6 @@
 ﻿{
-  "Revision": "1.0.0.7",
-  "Description": "Modified some SSD controller related codes",
+  "Revision": "1.0.0.8",
+  "Description": "808D0002 - Reported by J.P. through GCRL that replacing Led PCA fixed this error",
   "PlayStation5": {
     "ErrorCodes": [
       {
@@ -1884,6 +1884,12 @@
       {
         "ID": "808D0000",
         "Message": "Known Unknown 790 (Power) - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808D0002",
+        "Message": "Check LED PCA and its connecting cable. Try disconnecting, and/or replace.",
         "Status": 0,
         "Priority": 0
       },
