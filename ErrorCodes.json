@@ -1,6 +1,6 @@
 ﻿{
-  "Revision": "1.0.0.8",
-  "Description": "808D0002 - Reported by J.P. through GCRL that replacing Led PCA fixed this error",
+  "Revision": "1.0.0.9",
+  "Description": "Changed description for C0810303.",
   "PlayStation5": {
     "ErrorCodes": [
       {
@@ -2069,7 +2069,7 @@
       },
       {
         "ID": "C0810303",
-        "Message": "HDMI IC Problem or Data Line Short or Power Failure",
+        "Message": "HDMI IC not present or not reponding. Check data and power, and/or replace.",
         "Status": 0,
         "Priority": 0
       },
