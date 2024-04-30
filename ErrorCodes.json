@@ -1,6 +1,6 @@
 ﻿{
-  "Revision": "1.0.0.9",
-  "Description": "Changed description for C0810303.",
+  "Revision": "1.0.0.10",
+  "Description": "Updates on 80C00136, C0160203, C0160303, 80910002, C0020303",
   "PlayStation5": {
     "ErrorCodes": [
       {
@@ -1925,7 +1925,7 @@
       },
       {
         "ID": "80910002",
-        "Message": "Known Unknown 114 (SSD Controller) - Report Findings",
+        "Message": "Power Failure. Check Fuse F7001.",
         "Status": 0,
         "Priority": 0
       },
@@ -1961,7 +1961,7 @@
       },
       {
         "ID": "80C00136",
-        "Message": "WIFI/BT Module Not Responding. Check module and power.",
+        "Message": "WIFI/BT Module Not Responding. Check module and power. Check F7002.",
         "Status": 0,
         "Priority": 0
       },
@@ -2033,7 +2033,7 @@
       },
       {
         "ID": "C0020303",
-        "Message": "APU Not Responding - Trying Init or Reboot - 3",
+        "Message": "APU Not Responding - Trying Init or Reboot - 3. Check F3501, F7501.",
         "Status": 0,
         "Priority": 0
       },
@@ -2051,13 +2051,13 @@
       },
       {
         "ID": "C0160203",
-        "Message": "Known Unknown 203 (HDMI-\u003EAPU) - Report Findings",
+        "Message": "Power Failure. Check Fuse F7502 (next to SSD storage controller)",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "C0160303",
-        "Message": "Known Unknown 238 (HDMI-\u003EAPU) - Report Findings",
+        "Message": "Power Failure. Check Fuse F7502 (next to SSD storage controller)",
         "Status": 0,
         "Priority": 0
       },
