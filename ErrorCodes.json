@@ -1,6 +1,6 @@
 ﻿{
-  "Revision": "1.0.0.10",
-  "Description": "Updates on 80C00136, C0160203, C0160303, 80910002, C0020303",
+  "Revision": "1.0.0.11",
+  "Description": "Updates on C0810002, 80871001, 80870003, 808B000A, 808B000B, 808D0000, 80000009",
   "PlayStation5": {
     "ErrorCodes": [
       {
@@ -29,7 +29,7 @@
       },
       {
         "ID": "80000009",
-        "Message": "Unexpected Power Cut or Shutdown Failure",
+        "Message": "Unexpected Power Cut or Shutdown Failure. A single case reported in GCRL by BH where partial RAM swap fixed this (being the only error code).",
         "Status": 0,
         "Priority": 0
       },
@@ -1763,13 +1763,13 @@
       },
       {
         "ID": "80870003",
-        "Message": "SSD Controller chip not present or not responding.",
+        "Message": "SSD Controller Not Present or Not Responding.",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80871001",
-        "Message": "DDR4 Error (Power Failure or Short Circuit)",
+        "Message": "DDR4 Not Present or Not Responding (Power Failure or Short Circuit)",
         "Status": 0,
         "Priority": 0
       },
@@ -1824,6 +1824,18 @@
       {
         "ID": "808B0000",
         "Message": "Known Unknown 474 (Power or Short) - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808B000A",
+        "Message": "Potential SSD issue (Disappeared after swapping out SSD controller). Report Further Findings.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808B000B",
+        "Message": "Potential SSD issue (Disappeared after swapping out SSD controller). Report Further Findings.",
         "Status": 0,
         "Priority": 0
       },
@@ -1883,7 +1895,7 @@
       },
       {
         "ID": "808D0000",
-        "Message": "Known Unknown 790 (Power) - Report Findings",
+        "Message": "Overheating issue? - Report Findings",
         "Status": 0,
         "Priority": 0
       },
@@ -2063,7 +2075,7 @@
       },
       {
         "ID": "C0810002",
-        "Message": "HDMI IC Problem or Power Failure",
+        "Message": "HDMI IC Problem or Power Failure. Check 0.9v from x504 around HDMI IC (and other voltage rails in the area).",
         "Status": 0,
         "Priority": 0
       },
