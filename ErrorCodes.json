@@ -1,6 +1,6 @@
 ﻿{
-  "Revision": "1.0.0.12",
-  "Description": "Updates on C0810002, C0810303, 80871062. Added 80830060",
+  "Revision": "1.0.0.13",
+  "Description": "Updates on 80871055",
   "PlayStation5": {
     "ErrorCodes": [
       {
@@ -1787,7 +1787,7 @@
       },
       {
         "ID": "80871055",
-        "Message": "SSD Banks IO Error Between SSD Controller",
+        "Message": "SSD Banks IO Error, memory module missing or not reponding. Check SSD and controller.",
         "Status": 0,
         "Priority": 0
       },
