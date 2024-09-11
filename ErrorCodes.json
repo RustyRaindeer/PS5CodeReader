@@ -1,6 +1,6 @@
 ﻿{
-  "Revision": "1.0.0.13",
-  "Description": "Updates on 80871055",
+  "Revision": "1.0.0.14",
+  "Description": "Updates on 80894068, 80891001, 80892003, 80C00138, 808710FF, 8080001A, 8081001A",
   "PlayStation5": {
     "ErrorCodes": [
       {
@@ -89,13 +89,13 @@
       },
       {
         "ID": "80800014",
-        "Message": "TPM 2.0 chip or Power Failure",
+        "Message": "TPM 2.0 chip missing or not responding. Potential Power Failure.",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "8080001A",
-        "Message": "Non-Native TPM 2.0 Chip (After APU Init)",
+        "Message": "TPM 2.0 pairing mismatch (chip swapped from another board), unable to boot",
         "Status": 0,
         "Priority": 0
       },
@@ -1733,7 +1733,7 @@
       },
       {
         "ID": "8081001A",
-        "Message": "Known Unknown 769 (General Power Failure) - Report Findings",
+        "Message": "SSD Banks pairing mismatch failure. Non-matching NAND chips detected, or paired chips soldered in wrong order",
         "Status": 0,
         "Priority": 0
       },
@@ -1787,7 +1787,7 @@
       },
       {
         "ID": "80871055",
-        "Message": "SSD Banks IO Error, memory module missing or not reponding. Check SSD and controller.",
+        "Message": "SSD Banks IO Error, NAND memory module(s) missing or not reponding",
         "Status": 0,
         "Priority": 0
       },
@@ -1804,20 +1804,32 @@
         "Priority": 0
       },
       {
+        "ID": "808710FF",
+        "Message": "SSD Controller SPI bus error. Check TPM2.0 too (same SPI bus). Potential TPM CS# stuck to gnd.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
         "ID": "80891001",
-        "Message": "SSD Controller or DDR4 Error (Power Failure or Short Circuit)",
+        "Message": "SSD Controller or DDR4 Error (Power Failure or Short Circuit). RRR: Error was observed when certain SSD memory chip was missing.",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80892003",
-        "Message": "SSD Controller or DDR4 Error (Power Failure or Short Circuit)",
+        "Message": "SSD Controller or DDR4 Error (Power Failure or Short Circuit). RRR: Error was observed when certain SSD memory chip was missing.",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "8089400F",
         "Message": "SSD Controller or DDR4 Error (Power Failure or Short Circuit)",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80894068",
+        "Message": "Check SSD NAND chip(s). This code was seen with one specific chip missing/desoldered (top side, farthest away from M.2 slot). Code could potentially refer to a missing MBR or whatever?",
         "Status": 0,
         "Priority": 0
       },
@@ -1980,6 +1992,12 @@
       {
         "ID": "80C00136",
         "Message": "WIFI/BT Module Not Responding. Check module and power. Check F7002.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80C00138",
+        "Message": "TPM 2.0 SPI bus communication error. Potential CS# stuck to gnd. Check MISO/MOSI/CLK.",
         "Status": 0,
         "Priority": 0
       },
