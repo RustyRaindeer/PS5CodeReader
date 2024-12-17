@@ -5,6 +5,7 @@ using System.Diagnostics;
 using Microsoft.VisualStudio.Threading;
 using System.Globalization;
 using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 namespace PS5CodeReader
 {
@@ -482,6 +483,9 @@ namespace PS5CodeReader
                     }
                 } while (serial.BytesToRead != 0);
             }
+
+            LogBox.SelectionStart = 0;
+            LogBox.ScrollToCaret();
         }
 
         private void ShowLineDetail(string l)
@@ -500,9 +504,10 @@ namespace PS5CodeReader
                 case "OK":
 
                     var errorCode = split[2];
+                    
                     if (!ShowErrorLine.Checked)
                     {
-                        LogBox.AppendLine($"{errorCode}");
+                        LogBox.Append($"{errorCode} ");
                     }
                     if (errorCode == "FFFFFFFF")
                     {
@@ -544,16 +549,99 @@ namespace PS5CodeReader
                             }
                         }
 
-                        LogBox.Append($" {tmStr}: ");
+                        LogBox.Append($" {tmStr}: ", ReadOnlyRichTextBox.ColorDetail);
+
+                        var pwrState = UInt32.Parse(split[4], NumberStyles.HexNumber);
+                        string pwrStateStr = "";
+                        var osState = (pwrState >> 16) & 0xFF;
+                        if (osState == 0x00) pwrStateStr = "SystemReady|";
+                        else if (osState == 0x01) pwrStateStr = "MainOnStandby|";
+                        else if (osState >= 0x02 && osState <= 0x0f) pwrStateStr = "Reserved|";
+                        else if (osState >= 0x10 && osState <= 0x1f) pwrStateStr = "PSP|";
+                        else if (osState >= 0x20 && osState <= 0x3f) pwrStateStr = "BIOS|";
+                        else if (osState == 0x40) pwrStateStr = "EAPReady|";
+                        else if (osState >= 0x41 && osState <= 0x4f) pwrStateStr = "EAP|";
+                        else if (osState >= 0x50 && osState <= 0xbf) pwrStateStr = "Kernel|";
+                        else if (osState >= 0xc0 && osState <= 0xfe) pwrStateStr = "InitProcess|";
+                        else if (osState == 0xff ) pwrStateStr = "HostOsOff|";
+                        var sysState = (pwrState & 0xffff);
+                        if (sysState == 0x0000) pwrStateStr += "ACIN_L";
+                        else if (sysState == 0x0001) pwrStateStr += "Standby";
+                        else if (sysState == 0x0002) pwrStateStr += "PG2_ON";
+                        else if (sysState == 0x0003) pwrStateStr += "EFC_ON";
+                        else if (sysState == 0x0004) pwrStateStr += "EAP_ON";
+                        else if (sysState == 0x0005) pwrStateStr += "SoC_ON";
+                        else if (sysState == 0x0006) pwrStateStr += "ErrorDetected";
+                        else if (sysState == 0x0007) pwrStateStr += "FatalError";
+                        else if (sysState == 0x0008) pwrStateStr += "NeverBoot";
+                        else if (sysState == 0x0009) pwrStateStr += "ForcedOff";
+                        else if (sysState == 0x000a) pwrStateStr += "BT_FMW_DL";
+                        else pwrStateStr += $"?({sysState:X}h)?";
+                        LogBox.Append(" PwrState:");
+                        LogBox.Append($"{pwrStateStr} ", ReadOnlyRichTextBox.ColorDetail);
+
+                        var upCause = UInt16.Parse(split[5], NumberStyles.HexNumber);
+                        string upCstr = "??";
+                        if ((upCause & 0x00000001) != 0) upCstr = "PSUPwrOn";
+                        if ((upCause & 0x00000100) != 0) upCstr = "PwrButton";
+                        if ((upCause & 0x00000200) != 0) upCstr = "DiscLoaded";
+                        if ((upCause & 0x00000400) != 0) upCstr = "EjectButton";
+                        if ((upCause & 0x00010000) != 0) upCstr = "SoC_order";
+                        if ((upCause & 0x00020000) != 0) upCstr = "EAP_order";
+                        if ((upCause & 0x00040000) != 0) upCstr = "HDMI-CEC";
+                        if ((upCause & 0x00080000) != 0) upCstr = "BT-Dualsense";
+                        if ((upCause & 0x04000000) != 0) upCstr = "UARTCommand";
+                        LogBox.Append(" UpCause:");
+                        LogBox.Append($"{upCstr} ", ReadOnlyRichTextBox.ColorDetail);
+
+                        var devPM = UInt16.Parse(split[7], NumberStyles.HexNumber);
+                        string devPMstr = "";
+                        if ((devPM & 0x10) != 0) devPMstr += "H"; else devPMstr += "_";
+                        if ((devPM & 0x08) != 0) devPMstr += "B"; else devPMstr += "_";
+                        if ((devPM & 0x04) != 0) devPMstr += "C"; else devPMstr += "_";
+                        if ((devPM & 0x02) != 0) devPMstr += "U"; else devPMstr += "_";
+                        if ((devPM & 0x01) != 0) devPMstr += "W"; else devPMstr += "_";
+                        LogBox.Append(" DevPM:");
+                        LogBox.Append($"{devPMstr} ", ReadOnlyRichTextBox.ColorDetail);
+
+                        var cpuTemp = split[8];
+                        if (cpuTemp == "FFFF")
+                        {
+                            LogBox.Append(" TSoC:");
+                            LogBox.Append("*N/A* ", ReadOnlyRichTextBox.ColorDetail);
+
+                        }
+                        else
+                        {
+                            Double cpuTempD = Math.Round(UInt16.Parse(cpuTemp, NumberStyles.HexNumber) / 256.0, 1);
+                            LogBox.Append(" TSoC:");
+                            LogBox.Append($"{cpuTempD}ºC ", ReadOnlyRichTextBox.ColorDetail);
+                        }
+
+                        var envTemp = split[9].Split(':')[0]; ;
+                        if (envTemp == "0000")
+                        {
+                            LogBox.Append(" TEnv:");
+                            LogBox.AppendLine("*N/A* ", ReadOnlyRichTextBox.ColorDetail);
+                        }
+                        else
+                        {
+                            Double envTempD = Math.Round(UInt16.Parse(envTemp, NumberStyles.HexNumber) / 256.0, 1);
+                            LogBox.Append(" TEnv:");
+                            LogBox.AppendLine($"{envTempD}ºC ", ReadOnlyRichTextBox.ColorDetail);
+                        }
 
                         try
                         {
-                            var errorLookup = errorCodeList.PlayStation5.ErrorCodes.First(x => x.ID == errorCode);
+                            //var errorLookup = errorCodeList.PlayStation5.ErrorCodes.First(x => x.ID == errorCode);
+                            var errorLookup = errorCodeList.PlayStation5.ErrorCodes.First(x => Regex.IsMatch(errorCode, x.ID));
                             LogBox.AppendLine($"{errorLookup.Message}", ReadOnlyRichTextBox.ColorSuccess);
+                            LogBox.AppendLine("");
                         }
                         catch
                         {
                             LogBox.AppendLine("Unknown Error", ReadOnlyRichTextBox.ColorInformation);
+                            LogBox.AppendLine("");
                         }
                     }
                     break;

@@ -7,6 +7,7 @@ namespace PS5CodeReader
         internal static Color ColorError = Color.IndianRed;
         internal static Color ColorSuccess = Color.MediumSeaGreen;
         internal static Color ColorInformation = Color.DarkOrange;
+        internal static Color ColorDetail = Color.MediumBlue;
 
         public ReadOnlyRichTextBox()
         {
@@ -34,7 +35,6 @@ namespace PS5CodeReader
             SelectionStart = Text.Length;
             SelectionLength = 0;
             ScrollToCaret();
-            
         }
 
 

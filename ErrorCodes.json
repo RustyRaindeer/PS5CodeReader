@@ -1,77 +1,113 @@
 ﻿{
-  "Revision": "1.0.0.14",
-  "Description": "Updates on 80894068, 80891001, 80892003, 80C00138, 808710FF, 8080001A, 8081001A",
+  "Revision": "1.2.0.1",
+  "Description": "Major update. Please upgrade app for better experience (due to RegExp usage).",
   "PlayStation5": {
     "ErrorCodes": [
       {
-        "ID": "00100E3C",
-        "Message": "Known Unknown 908 - Report Findings",
-        "Status": 0,
-        "Priority": 0
-      },
-      {
-        "ID": "0015442C",
-        "Message": "Known Unknown 889 - Report Findings",
-        "Status": 0,
-        "Priority": 0
-      },
-      {
-        "ID": "015E4E8B",
-        "Message": "Known Unknown 163 (Rare) - Report Immediately",
-        "Status": 0,
-        "Priority": 0
-      },
-      {
         "ID": "80000001",
-        "Message": "Overheat or Init APU Error",
+        "Message": "Failed to access thermal sensor. Overheat or Init APU Error.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80000004",
+        "Message": "AC/DC power failure",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80000005",
+        "Message": "Main SoC CPU Power Faailure",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80000006",
+        "Message": "Main SoC GPU Power Failure",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80000007",
+        "Message": "Main SoC Thrm High Temperature Abnormality",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80000008",
+        "Message": "Drive Dead Notify Timeout",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80000009",
-        "Message": "Unexpected Power Cut or Shutdown Failure. A single case reported in GCRL by BH where partial RAM swap fixed this (being the only error code).",
+        "Message": "AC In Detect. Unexpected Power Cut or Shutdown Failure",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "8000000A",
+        "Message": "VRM HOT Fatal Error",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "8000000B",
+        "Message": "Unexpected Thermal Shutdown",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "8000000C",
-        "Message": "Known Unknown 303 (Power or Short) - Report Findings",
+        "Message": "Main SoC Temperature Alert. (Power or Short) - Report Findings",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80050000",
-        "Message": "APU VRM (2 Phases) Power Fail - Check PWM controller",
+        "Message": "SoC VRM Power Fail (2 Phases / CPU)",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80050020",
-        "Message": "Known Unknown 304 (Power or Short) - Report Findings",
+        "Message": "SoC VRM Power Fail (2 Phases / CPU) #0020 - Report Findings",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80050040",
-        "Message": "Known Unknown 370 (Power or Short) - Report Findings",
+        "Message": "SoC VRM Power Fail (2 Phases / CPU) #0040 - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "8005....",
+        "Message": "SoC VRM Power Fail (2 Phases / CPU) #XXXX - Report Findings",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80060000",
-        "Message": "APU VRM (6 Phases) Power Fail - Check PWM controller",
+        "Message": "SoC VRM Power Fail (6 Phases / GPU)",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80060020",
-        "Message": "Known Unknown 386 (Power or Short) - Report Findings",
+        "Message": "SoC VRM Power Fail (6 Phases / GPU) #0020 - Report Findings",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80060040",
-        "Message": "Known Unknown 182 (APU or VRM) - Report Findings",
+        "Message": "SoC VRM Power Fail (6 Phases / GPU) #0040 - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "8006....",
+        "Message": "SoC VRM Power Fail (6 Phases / GPU) #XXXX - Report Findings",
         "Status": 0,
         "Priority": 0
       },
@@ -1726,8 +1762,32 @@
         "Priority": 0
       },
       {
+        "ID": "8080....",
+        "Message": "Fatal shutdown by OS request #XXXX - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
         "ID": "80810001",
-        "Message": "General Power Failure (Peripheral, GDDR6, APU, Data Line Short)",
+        "Message": "Power Sequence Error. General Power Failure (Peripheral, GDDR6, APU, Data Line Short)",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80810002",
+        "Message": "Power Sequence Error / NVS/NOR Access",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80810013",
+        "Message": "Power Sequence Error / ScCmd DRAM Init",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80810014",
+        "Message": "Power Sequence Error / ScCmd Link Up Failure",
         "Status": 0,
         "Priority": 0
       },
@@ -1739,7 +1799,7 @@
       },
       {
         "ID": "80830000",
-        "Message": "Shutdown or Freeze After SAM_IPL Loaded - GDDR6 Data Line Issue (Replace)",
+        "Message": "Main SoC Sync Flood. Shutdown or Freeze After SAM_IPL Loaded - GDDR6 Data Line Issue (Replace)",
         "Status": 0,
         "Priority": 0
       },
@@ -1768,44 +1828,86 @@
         "Priority": 0
       },
       {
+        "ID": "80840000",
+        "Message": "PCIe Link Down",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80870001",
+        "Message": "SSD Controller RAM Protect Error",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80870002",
+        "Message": "SSD Controller RAM Parity Error",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
         "ID": "80870003",
-        "Message": "SSD Controller Not Present or Not Responding.",
+        "Message": "SSD Controller Boot Failed. Not Present or Not Responding.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80870004",
+        "Message": "SSD Controller Boot Failed (Missing error Record)",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80870005",
+        "Message": "SSD Controller Boot Failed (State Error, couldn't change to SPI mode.)",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80871001",
-        "Message": "DDR4 Not Present or Not Responding (Power Failure or Short Circuit)",
+        "Message": "SSD Controller ScCmd Response Error (#01). DDR4 Not Present or Not Responding (Power Failure or Short Circuit)",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80871054",
-        "Message": "SSD Banks IO Error Between SSD Controller",
+        "Message": "SSD Controller ScCmd Response Error (#54). SSD Banks IO Error Between SSD Controller",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80871055",
-        "Message": "SSD Banks IO Error, NAND memory module(s) missing or not reponding",
+        "Message": "SSD Controller ScCmd Response Error (#55). SSD Banks IO Error, NAND memory module(s) missing or not reponding",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80871062",
-        "Message": "SSD Controller \u003C-\u003E Southbridge Data Line Error. Check signal lines for knocked off components and/or replace/reflow chips",
+        "Message": "SSD Controller ScCmd Response Error (#62). SSD \u003C-\u003E SB Data Line Error. Check signal lines for knocked off components and/or replace/reflow chips",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80871064",
-        "Message": "SSD Controller related error (replace) [GCRL]",
+        "Message": "SSD Controller ScCmd Response Error (#64). SSD Controller related error (replace) [GCRL]",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808710FF",
-        "Message": "SSD Controller SPI bus error. Check TPM2.0 too (same SPI bus). Potential TPM CS# stuck to gnd.",
+        "Message": "SSD Controller ScCmd Response Error (#FF). SPI bus error? Check TPM2.0 too (same bus). Potential TPM CS stuck to gnd.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808710..",
+        "Message": "SSD Controller ScCmd Response Error (#XX). Report Findings.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "8088....",
+        "Message": "SSD Controller Boot EAP Error (#YYYY). Report Findings.",
         "Status": 0,
         "Priority": 0
       },
@@ -1835,157 +1937,319 @@
       },
       {
         "ID": "808940AE",
-        "Message": "NOR Modification Error.",
+        "Message": "Flash Controller Boot EFC Error #4-0AE.  NOR Modification Error?",
         "Status": 0,
         "Priority": 0
       },
       {
-        "ID": "808B0000",
-        "Message": "Known Unknown 474 (Power or Short) - Report Findings",
+        "ID": "8089....",
+        "Message": "Flash Controller Boot EFC Error #XYYY",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808A....",
+        "Message": "Flash Controller Abnormal Temperature #XXXX (last 4 digits => temperature)",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808B000A",
-        "Message": "Potential SSD issue (Disappeared after swapping out SSD controller). Report Further Findings.",
+        "Message": "SSD Controller Watchdog Error #00-0-A. Swap out SSD controller. Report Further Findings.",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808B000B",
-        "Message": "Potential SSD issue (Disappeared after swapping out SSD controller). Report Further Findings.",
+        "Message": "SSD Controller Watchdog Error #00-0-B. Swap out SSD controller. Report Further Findings.",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808B0027",
-        "Message": "Power Short 5V Line (F7002)",
+        "Message": "SSD Controller Watchdog Error #00-2-7. Power Short 5V Line (F7002)",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808B0098",
-        "Message": "DDR4 Error (Communication Issue)",
+        "Message": "SSD Controller Watchdog Error #00-9-8. DDR4 Error (Communication Issue)",
         "Status": 0,
         "Priority": 0
       },
       {
-        "ID": "808B00FF",
-        "Message": "Known Unknown 823 (Power) - Report Findings",
+        "ID": "808B....",
+        "Message": "SSD Controller Watchdog Error #XXYZ - Report Findings",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808C2092",
-        "Message": "Possibly APU I2C lines damaged or disconnected. Check APU for die cracks.",
+        "Message": "USB Type-C Error #2092. Possibly APU I2C lines damaged or disconnected. Check APU for die cracks.",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808C3090",
-        "Message": "Power Failure - PWM or Unspecific",
+        "Message": "USB Type-C Error #3090. Power Failure - PWM or Unspecific",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808C3790",
-        "Message": "Power Failure - PWM or Unspecific",
+        "Message": "USB Type-C Error #3790. Power Failure - PWM or Unspecific",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808C3F90",
-        "Message": "Power Failure - PWM or Unspecific",
-        "Status": 0,
-        "Priority": 0
-      },
-      {
-        "ID": "808C4E90",
-        "Message": "Known Unknown 516 (Power or Short) - Report Findings",
+        "Message": "USB Type-C Error #3F90. Power Failure - PWM or Unspecific",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808C4F90",
-        "Message": "Power Failure - PWM or Unspecific",
+        "Message": "USB Type-C Error #4F90. Power Failure - PWM or Unspecific",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808C....",
+        "Message": "USB Type-C Error #XXXX. Report Findings",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808D0000",
-        "Message": "Overheating issue? - Report Findings",
+        "Message": "Thermal Shutdown / overheating: APU/GPU",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808D0001",
+        "Message": "Thermal Shutdown (Sensor #1 - TH5101 - Board dependant. Check between GPU VRM - Main Power input area",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808D0002",
-        "Message": "Check LED PCA and its connecting cable. Try disconnecting, and/or replace.",
+        "Message": "Thermal Shutdown (Sensor #2 - LED PCA) Check LED PCA and its connecting cable. Try disconnecting, and/or replace.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808D0003",
+        "Message": "Thermal Shutdown (Sensor #3 - TH5103 - Check SSD PMIC Area (EDM-010), Check main power input area (EDM-020)",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808E0000",
+        "Message": "Abnormal Hcmd Comm. Error #0 - (TPM Related?) - Report Findings.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808E0001",
+        "Message": "Abnormal Hcmd Comm. Error #1 - (TPM Related?) - Report Findings.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808E0002",
+        "Message": "Abnormal Hcmd Comm. Error #2 Host Write Flag Error - (TPM Related?) - Report Findings.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808E0003",
+        "Message": "Abnormal Hcmd Comm. Error #3 EMC Read Flag Error - (TPM Related?) - Report Findings.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808E0004",
+        "Message": "Abnormal Hcmd Comm. Error #4 Write Flag Error - (TPM Related?) - Report Findings.",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808E0005",
-        "Message": "Known Unknown 125 (TPM) - Report Findings",
+        "Message": "Abnormal Hcmd Comm. Error #5 Wait SIG1 Error - (TPM Related?) - Report Findings.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808E0006",
+        "Message": "Abnormal Hcmd Comm. Error #6 Reset Request From Host - (TPM Related?) - Report Findings.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808E0007",
+        "Message": "Abnormal Hcmd Comm. Error #7 Checksum Error - (TPM Related?) - Report Findings.",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808E0109",
-        "Message": "Known Unknown 118 (TPM) - Report Findings",
+        "Message": "Abnormal Hcmd Comm. Error #109 (TPM related?) - Report Findings",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808E829A",
-        "Message": "Known Unknown 116 (TPM) - Report Findings",
+        "Message": "Abnormal Hcmd Comm. Error #829A (TPM related?) - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808E....",
+        "Message": "Abnormal Hcmd Comm. Error #XXXX (TPM related?) - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808F0001",
+        "Message": "TPM 2.0 chip or Power Failure. Communication Error (Timeout).",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808F0002",
-        "Message": "TPM 2.0 chip or Power Failure",
+        "Message": "TPM 2.0 chip or Power Failure. Communication Error (Reset)",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "808F0003",
-        "Message": "TPM 2.0 chip or Power Failure",
+        "Message": "TPM 2.0 chip or Power Failure. Communication Error (TIS Error)",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "808F00FF",
+        "Message": "TPM 2.0 chip Communication Error (Undefined)",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "8090....",
+        "Message": "Software / Fatal Shutdown by Additional Error Code (#XXXX)",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80910002",
-        "Message": "Power Failure. Check Fuse F7001.",
+        "Message": "SSD PMIC Error #00-02 / Power Failure. Check Fuse F7001. Possible 504X 2v [TheCod3r].",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80910200",
-        "Message": "SSD Controller or DDR4 Error (Power Failure or Short Circuit)",
+        "Message": "SSD PMIC Error #02-00. SSD Controller or DDR4 Error (Power Failure or Short Circuit). Possible DA9081 1.2v Side: APU [TheCod3r]",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80910800",
-        "Message": "SSD Controller or DDR4 Error (Power Failure or Short Circuit)",
+        "Message": "SSD PMIC Error #08-00. SSD Controller or DDR4 Error (Power Failure or Short Circuit). Possible DA9081 1.2v Side: Fan [TheCod3r]",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80910A00",
+        "Message": "SSD PMIC Error #0A-00. Possible SSD Controller or DDR4 Error (Power Failure or Short Circuit) [TheCod3r]",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80912000",
+        "Message": "SSD PMIC Error #20-00. Report Findings. Possible DA9081 2.5v [TheCod3r]",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80918000",
+        "Message": "SSD PMIC Error #80-00. Report Findings. Possible DA9081 0.8v [TheCod3r]",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "8091....",
+        "Message": "SSD PMIC Error #XXYY - Report Findings",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80C00114",
-        "Message": "Known Unknown 779 (General Power Failure - SSD/APU Line) - Report Findings",
+        "Message": "EMC Watchdog for SoC (General Power Failure - SSD/APU Line) - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80C00115",
+        "Message": "EMC Watchdog for EAP. Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80C0012C",
+        "Message": "BD Drive Detached",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80C0012D",
-        "Message": "Known Unknown 953 (Data) - Report Findings",
+        "Message": "EMC Watchdog Timer Error - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80C0012E",
+        "Message": "EMC ADC Error (Button)",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80C0012F",
+        "Message": "EMC ADC Error (BD Drive)",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80C00130",
+        "Message": "EMC ADC Error (AC In Detection)",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80C00131",
+        "Message": "USB Over Current Detection (Type-A)",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80C00132",
+        "Message": "FAN Servo Parameter Storage Access Failed. Check NVS/NOR.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80C00133",
+        "Message": "WIFI/BT FW Header Invalid. Check NVS/NOR.",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "80C00134",
-        "Message": "SSD Banks Error",
+        "Message": "WIFI/BT Firmware Download Failed / Communication Error",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80C00135",
+        "Message": "WIFI/BT Firmware/software issue",
         "Status": 0,
         "Priority": 0
       },
@@ -1996,8 +2260,20 @@
         "Priority": 0
       },
       {
+        "ID": "80C00137",
+        "Message": "WIFI/BT Error (Miscellaneous/undefined)",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
         "ID": "80C00138",
-        "Message": "TPM 2.0 SPI bus communication error. Potential CS# stuck to gnd. Check MISO/MOSI/CLK.",
+        "Message": "SSD Controller Interrupt HW Error. TPM 2.0 SPI bus communication error. Potential CS stuck to gnd. Check MISO/MOSI/CLK.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80C00139",
+        "Message": "BD Drive Eject Delayed",
         "Status": 0,
         "Priority": 0
       },
@@ -2008,8 +2284,44 @@
         "Priority": 0
       },
       {
-        "ID": "80D00402",
-        "Message": "SSD Banks Error",
+        "ID": "80D001..",
+        "Message": "EMC USB - WIFI/BT Error 1 #XX (Bulk out) - Check SB & WIFI/BT module.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80D002..",
+        "Message": "EMC USB - WIFI/BT Error 2 #XX (Bulk in) - Check SB & WIFI/BT module.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80D003..",
+        "Message": "EMC USB - WIFI/BT Error 3 #XX (BT Init) - Check SB & WIFI/BT module.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80D004..",
+        "Message": "EMC USB - WIFI/BT Error 4 #XX (FMW DL) - Check SB & WIFI/BT module.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80D005..",
+        "Message": "EMC USB - WIFI/BT Error 5 #XX (Release dev) - Check SB & WIFI/BT module.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80D006..",
+        "Message": "EMC USB - WIFI/BT Error 6 #XX (Exec Cmd0) - Check SB & WIFI/BT module.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "80D007..",
+        "Message": "EMC USB - WIFI/BT Error 7 #XX (Exec Cmd1) - Check SB & WIFI/BT module.",
         "Status": 0,
         "Priority": 0
       },
@@ -2026,104 +2338,170 @@
         "Priority": 0
       },
       {
-        "ID": "B0082108",
-        "Message": "Known Unknown 866 (Chip or Data - Report Findings",
-        "Status": 0,
-        "Priority": 0
-      },
-      {
-        "ID": "B0085108",
-        "Message": "Known Unknown 519 (Chip or Data) - Report Findings",
-        "Status": 0,
-        "Priority": 0
-      },
-      {
-        "ID": "B0088108",
-        "Message": "Known Unknown 810 (Chip or Data) - Report Findings",
-        "Status": 0,
-        "Priority": 0
-      },
-      {
-        "ID": "B0FFFFFF",
-        "Message": "Known Unknown 104 - Report Findings",
+        "ID": "B0......",
+        "Message": "Sonics (?) Bus Error #XXXXXX - Report Findings",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "C0010303",
-        "Message": "Known Unknown 525 (APU) - Report Findings",
+        "Message": "Main SoC Access Error (I2c) #0303 - Report Findings",
         "Status": 0,
         "Priority": 0
       },
       {
-        "ID": "C0020103",
-        "Message": "APU Not Responding - Trying Init or Reboot - 1",
-        "Status": 0,
-        "Priority": 0
-      },
-      {
-        "ID": "C0020203",
-        "Message": "APU Not Responding - Trying Init or Reboot - 2",
+        "ID": "C001....",
+        "Message": "Main SoC Access Error (I2c) #XXXX - Report Findings",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "C0020303",
-        "Message": "APU Not Responding - Trying Init or Reboot - 3. Check F3501, F7501.",
+        "Message": "Main SoC Access Error (SB-TSI I2c) #0303. Check F3501, F7501. Check HDMI encoder [GCRL]. Check PSU.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "C0020103",
+        "Message": "Main SoC Access Error (SB-TSI I2c) #0103 - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "C0020203",
+        "Message": "Main SoC Access Error (SB-TSI I2c) #0203 - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "C002....",
+        "Message": "Main SoC Access Error (SB-TSI I2c) #XXXX - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "C003....",
+        "Message": "Main SoC Access Error (SB-RMI) #XXXX - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "C00B....",
+        "Message": "Main SoC Access Error (Serial Flash / NOR) #XXXX - Report Findings",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "C00C0002",
-        "Message": "VRM Controller Failure - Check PWM controller and related components",
+        "Message": "VRM Controller Access Error #0002 - Check PWM controller and related components",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "C00C0303",
-        "Message": "Known Unknown 789 (General Power Failure) - Report Findings",
+        "Message": "VRM Controller Access Error #0303 - Check PWM controller and related components",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "C00C....",
+        "Message": "VRM Controller Access Error #XXXX - Check PWM controller and related components",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "C00D....",
+        "Message": "PMIC Subsystem Access Error #XXXX",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "C010....",
+        "Message": "SSD Controller Access Error #XXXX",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "C011....",
+        "Message": "Potentiometer (?) Access Error #XXXX - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "C015....",
+        "Message": "PCIe Access Error #XXXX",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "C0160203",
-        "Message": "Power Failure. Check Fuse F7502 (next to SSD storage controller)",
+        "Message": "SSD PMIC Access Error #0203. Check Fuse F7502 (next to SSD storage controller)",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "C0160303",
-        "Message": "Power Failure. Check Fuse F7502 (next to SSD storage controller)",
+        "Message": "SSD PMIC Access Error #0303. Check Fuse F7502 (next to SSD storage controller)",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "C016....",
+        "Message": "SSD PMIC Access Error / Power Failure",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "C0810002",
-        "Message": "HDMI IC Problem or Power Failure. Pay attention to 0v9 (generated by x504 chip) close to HDMI IC.",
+        "Message": "HDMI IC Access Error #0002. IC Problem or Power Failure. Pay attention to 0v9 (generated by x504 chip) close to HDMI IC.",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "C0810303",
-        "Message": "HDMI IC not present or not reponding. Check data and power (1v8/0v9 regulators), and/or replace HDMI IC.",
+        "Message": "HDMI IC Access Error #0303. HDMI IC not present or not reponding. Check data and power (1v8/0v9 regulators), and/or replace HDMI IC.",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "C081....",
+        "Message": "HDMI IC Access Error #XXXX. Check/replace.",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "C0900002",
-        "Message": "Known Unknown 174 (HDMI) - Report Findings",
+        "Message": "USB Type-C PD Controller Access Error #0002 - Report Findings",
         "Status": 0,
         "Priority": 0
       },
       {
         "ID": "C0900303",
-        "Message": "Known Unknown 251 (HDMI-\u003EAPU) - Report Findings",
+        "Message": "USB Type-C PD Controller Access Error #0303 - Report Findings",
         "Status": 0,
         "Priority": 0
       },
       {
+        "ID": "C090....",
+        "Message": "USB Type-C PD Controller Access Error #XXXX - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "C091....",
+        "Message": "USB Type-C USB/DP Mux Access Error #XXXX - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+     {
         "ID": "C0920002",
-        "Message": "Known Unknown 544 (APU) - Report Findings",
+        "Message": "USB Type-C Redriver Access Error #0002) - Report Findings",
+        "Status": 0,
+        "Priority": 0
+      },
+      {
+        "ID": "C092....",
+        "Message": "USB Type-C Redriver Access Error #XXXX - Report Findings",
         "Status": 0,
         "Priority": 0
       },
