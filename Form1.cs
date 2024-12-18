@@ -580,8 +580,9 @@ namespace PS5CodeReader
                         LogBox.Append(" PwrState:");
                         LogBox.Append($"{pwrStateStr} ", ReadOnlyRichTextBox.ColorDetail);
 
-                        var upCause = UInt16.Parse(split[5], NumberStyles.HexNumber);
+                        var upCause = UInt32.Parse(split[5], NumberStyles.HexNumber);
                         string upCstr = "??";
+                        if ((upCause             ) == 0) upCstr = "N/A";
                         if ((upCause & 0x00000001) != 0) upCstr = "PSUPwrOn";
                         if ((upCause & 0x00000100) != 0) upCstr = "PwrButton";
                         if ((upCause & 0x00000200) != 0) upCstr = "DiscLoaded";
@@ -605,7 +606,7 @@ namespace PS5CodeReader
                         LogBox.Append($"{devPMstr} ", ReadOnlyRichTextBox.ColorDetail);
 
                         var cpuTemp = split[8];
-                        if (cpuTemp == "FFFF")
+                        if (cpuTemp == "0000" || cpuTemp == "FFFF")
                         {
                             LogBox.Append(" TSoC:");
                             LogBox.Append("*N/A* ", ReadOnlyRichTextBox.ColorDetail);
@@ -619,7 +620,7 @@ namespace PS5CodeReader
                         }
 
                         var envTemp = split[9].Split(':')[0]; ;
-                        if (envTemp == "0000")
+                        if (envTemp == "0000" || envTemp == "FFFF")
                         {
                             LogBox.Append(" TEnv:");
                             LogBox.AppendLine("*N/A* ", ReadOnlyRichTextBox.ColorDetail);
