@@ -10,6 +10,8 @@ namespace PS5CodeReader
         ReadAllErrorCodes, 
         [Description("Clear Error Codes")]
         ClearErrorCodes,
+        [Description("Interpret Error Code")]
+        InterpretError,
         [Description("Monitor Mode")]
         MonitorMode,
         [Description("Run Command Lists")]

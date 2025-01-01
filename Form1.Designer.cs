@@ -33,6 +33,9 @@
             PanelRawCommand = new Panel();
             label4 = new Label();
             TextBoxRawCommand = new TextBox();
+            PanelInterpretError = new Panel();
+            label5 = new Label();
+            TextBoxInterpretError = new TextBox();
             label3 = new Label();
             label1 = new Label();
             ComboBoxDevices = new ComboBox();
@@ -44,6 +47,7 @@
             label2 = new Label();
             panel4.SuspendLayout();
             PanelRawCommand.SuspendLayout();
+            PanelInterpretError.SuspendLayout();
             panel3.SuspendLayout();
             SuspendLayout();
             // 
@@ -54,7 +58,7 @@
             LogBox.Margin = new Padding(3, 2, 3, 2);
             LogBox.Name = "LogBox";
             LogBox.ReadOnly = true;
-            LogBox.Size = new Size(728, 376);
+            LogBox.Size = new Size(728, 329);
             LogBox.TabIndex = 5;
             LogBox.TabStop = false;
             LogBox.Text = "";
@@ -64,10 +68,10 @@
             panel4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel4.Controls.Add(LogBox);
             panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(0, 176);
+            panel4.Location = new Point(0, 223);
             panel4.Margin = new Padding(3, 2, 3, 2);
             panel4.Name = "panel4";
-            panel4.Size = new Size(728, 376);
+            panel4.Size = new Size(728, 329);
             panel4.TabIndex = 14;
             // 
             // PanelRawCommand
@@ -76,7 +80,7 @@
             PanelRawCommand.Controls.Add(label4);
             PanelRawCommand.Controls.Add(TextBoxRawCommand);
             PanelRawCommand.Dock = DockStyle.Top;
-            PanelRawCommand.Location = new Point(0, 129);
+            PanelRawCommand.Location = new Point(0, 176);
             PanelRawCommand.Margin = new Padding(3, 2, 3, 2);
             PanelRawCommand.Name = "PanelRawCommand";
             PanelRawCommand.Size = new Size(728, 47);
@@ -101,6 +105,40 @@
             TextBoxRawCommand.Size = new Size(587, 23);
             TextBoxRawCommand.TabIndex = 12;
             TextBoxRawCommand.KeyPress += TextBoxRawCommand_KeyPress;
+            // 
+            // PanelInterpretError
+            // 
+            PanelInterpretError.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            PanelInterpretError.Controls.Add(label5);
+            PanelInterpretError.Controls.Add(TextBoxInterpretError);
+            PanelInterpretError.Dock = DockStyle.Top;
+            PanelInterpretError.Location = new Point(0, 129);
+            PanelInterpretError.Margin = new Padding(3, 2, 3, 2);
+            PanelInterpretError.Name = "PanelInterpretError";
+            PanelInterpretError.Size = new Size(728, 47);
+            PanelInterpretError.TabIndex = 13;
+            PanelInterpretError.Visible = false;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(3, 2);
+            label5.Name = "label5";
+            label5.Size = new Size(133, 15);
+            label5.TabIndex = 11;
+            label5.Text = "Interpret Error Response";
+            // 
+            // TextBoxInterpretError
+            // 
+            TextBoxInterpretError.Enabled = false;
+            TextBoxInterpretError.Location = new Point(3, 20);
+            TextBoxInterpretError.Margin = new Padding(3, 2, 3, 2);
+            TextBoxInterpretError.Name = "TextBoxInterpretError";
+            TextBoxInterpretError.Size = new Size(587, 23);
+            TextBoxInterpretError.TabIndex = 12;
+            TextBoxInterpretError.Text = "OK 00000000 80800000 00000000 00000000 00000100 0000 0000 FFFF FFFF";
+            TextBoxInterpretError.TextChanged += TextBoxInterpretError_TextChanged;
+            TextBoxInterpretError.KeyPress += TextBoxInterpretError_KeyPress;
             // 
             // label3
             // 
@@ -210,6 +248,7 @@
             ClientSize = new Size(728, 552);
             Controls.Add(panel4);
             Controls.Add(PanelRawCommand);
+            Controls.Add(PanelInterpretError);
             Controls.Add(panel3);
             Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
@@ -219,6 +258,8 @@
             panel4.ResumeLayout(false);
             PanelRawCommand.ResumeLayout(false);
             PanelRawCommand.PerformLayout();
+            PanelInterpretError.ResumeLayout(false);
+            PanelInterpretError.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ResumeLayout(false);
@@ -227,8 +268,11 @@
         #endregion
         private ReadOnlyRichTextBox LogBox;
         private Panel PanelRawCommand;
+        private Panel PanelInterpretError;
         private Panel panel4;
         private TextBox TextBoxRawCommand;
+        private TextBox TextBoxInterpretError;
+        private Label label5;
         private Label label4;
         private Label label3;
         private Label label1;

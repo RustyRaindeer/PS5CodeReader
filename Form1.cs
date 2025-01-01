@@ -111,6 +111,7 @@ namespace PS5CodeReader
         private void ComboBoxOperationType_SelectedValueChanged(object? sender, EventArgs e)
         {
             PanelRawCommand.Visible = ComboBoxOperationType.SelectedValue is OperationType type && type == OperationType.RunRawCommand;
+            PanelInterpretError.Visible = ComboBoxOperationType.SelectedValue is OperationType type2 && type2 == OperationType.InterpretError;
         }
 
         private void ComboBoxDatabase_SelectedValueChanged(object? sender, EventArgs e)
@@ -331,6 +332,7 @@ namespace PS5CodeReader
                 ComboBoxOperationType.Enabled = value;
                 ComboBoxDatabase.Enabled = value;
                 TextBoxRawCommand.Enabled = !value;
+                TextBoxInterpretError.Enabled = !value;
             }
         }
 
@@ -441,6 +443,10 @@ namespace PS5CodeReader
                     LogBox.AppendLine("[*] Operation: Run Raw Command.", ReadOnlyRichTextBox.ColorError);
                     await RunRawCommandAsync();
                     break;
+                case OperationType.InterpretError:
+                    LogBox.AppendLine("[*] Operation: Interpret Error Code.", ReadOnlyRichTextBox.ColorError);
+                    await InterpretErrorAsync();
+                    break;
 
             }
         }
@@ -504,7 +510,7 @@ namespace PS5CodeReader
                 case "OK":
 
                     var errorCode = split[2];
-                    
+
                     if (!ShowErrorLine.Checked)
                     {
                         LogBox.Append($"{errorCode} ");
@@ -563,7 +569,7 @@ namespace PS5CodeReader
                         else if (osState >= 0x41 && osState <= 0x4f) pwrStateStr = "EAP|";
                         else if (osState >= 0x50 && osState <= 0xbf) pwrStateStr = "Kernel|";
                         else if (osState >= 0xc0 && osState <= 0xfe) pwrStateStr = "InitProcess|";
-                        else if (osState == 0xff ) pwrStateStr = "HostOsOff|";
+                        else if (osState == 0xff) pwrStateStr = "HostOsOff|";
                         var sysState = (pwrState & 0xffff);
                         if (sysState == 0x0000) pwrStateStr += "ACIN_L";
                         else if (sysState == 0x0001) pwrStateStr += "Standby";
@@ -582,7 +588,7 @@ namespace PS5CodeReader
 
                         var upCause = UInt32.Parse(split[5], NumberStyles.HexNumber);
                         string upCstr = "??";
-                        if ((upCause             ) == 0) upCstr = "N/A";
+                        if ((upCause) == 0) upCstr = "N/A";
                         if ((upCause & 0x00000001) != 0) upCstr = "PSUPwrOn";
                         if ((upCause & 0x00000100) != 0) upCstr = "PwrButton";
                         if ((upCause & 0x00000200) != 0) upCstr = "DiscLoaded";
@@ -732,7 +738,7 @@ namespace PS5CodeReader
                 LogBox.AppendLine("[-] No Playstation 5 Detected!", ReadOnlyRichTextBox.ColorError);
                 return;
             }
-            
+
             using var ofd = new System.Windows.Forms.OpenFileDialog();
             ofd.InitialDirectory = Directory.GetCurrentDirectory();
             ofd.RestoreDirectory = true;
@@ -793,6 +799,24 @@ namespace PS5CodeReader
                 } while (serial.BytesToRead != 0);
             } while (!cancellationTokenSource.IsCancellationRequested);
         }
+
+        private readonly AsyncAutoResetEvent AutoResetEventInterpretError = new AsyncAutoResetEvent(false);
+        /// <summary>
+        /// Interprets error code line provided by user. 
+        /// </summary>
+        /// <returns></returns>
+        private async Task InterpretErrorAsync()
+        {
+            do
+            {
+                cancellationTokenSource = new CancellationTokenSource();
+                await AutoResetEventInterpretError.WaitAsync(cancellationTokenSource.Token);
+                var command = TextBoxInterpretError.Text.Trim();
+                ShowLineDetail(command);
+                cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+            } while (!cancellationTokenSource.IsCancellationRequested);
+        }
+
         #endregion
 
         private void TextBoxRawCommand_KeyPress(object sender, KeyPressEventArgs e)
@@ -801,6 +825,15 @@ namespace PS5CodeReader
             if (e.KeyChar == (char)Keys.Enter)
             {
                 AutoResetEventRawCommand.Set();
+            }
+        }
+
+        private void TextBoxInterpretError_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!TextBoxInterpretError.Text.Any()) return; // dont send empty commands
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                AutoResetEventInterpretError.Set();
             }
         }
 
@@ -821,6 +854,11 @@ namespace PS5CodeReader
 
         private void ComboBoxDatabase_SelectedIndexChanged(object sender, EventArgs e)
         {
+        }
+
+        private void TextBoxInterpretError_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
