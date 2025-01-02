@@ -642,7 +642,30 @@ namespace PS5CodeReader
                         {
                             //var errorLookup = errorCodeList.PlayStation5.ErrorCodes.First(x => x.ID == errorCode);
                             var errorLookup = errorCodeList.PlayStation5.ErrorCodes.First(x => Regex.IsMatch(errorCode, x.ID));
-                            LogBox.AppendLine($"{errorLookup.Message}", ReadOnlyRichTextBox.ColorSuccess);
+                            String msg = errorLookup.Message;
+                            // now, let's replace the error detail "#XYZ" in the message string with the corresponding
+                            // part of the error code.
+                            String matcher = "#[XYZ]+";
+                            Match m = Regex.Match(msg, matcher);
+                            if (m.Success && m.Value.Length < 8)
+                            {
+                                var len = m.Value.Length;
+                                // get as many digits from the end of the error code as there are letters X,Y,Z in the message string
+                                var code = $"#{errorCode.Substring(errorCode.Length - len + 1)}";
+                                var ch = m.Value[m.Length - 1];
+                                // add a hyphen between any sequence of X,Y and Z
+                                for (int i = len - 1; i > 0; --i)
+                                {
+                                    if (m.Value[i] != ch)
+                                    {
+                                        code = code.Insert(i + 1, "-");
+                                        ch = m.Value[i];
+                                    }
+                                }
+                                // and last, replace the #XYZ in message string with the corresponding code
+                                msg = Regex.Replace(msg, matcher, $"{code}");
+                            }
+                            LogBox.AppendLine($"{msg}", ReadOnlyRichTextBox.ColorSuccess);
                             LogBox.AppendLine("");
                         }
                         catch
